@@ -1,11 +1,8 @@
 import fs from 'fs';
-import https from 'https';
+import http from 'http';
 import WebSocket from 'ws';
  
-const server = https.createServer({
-  cert: fs.readFileSync('./cert.pem'),
-  key: fs.readFileSync('./key.pem')
-});
+const server = http.createServer();
 const wss = new WebSocket.Server({ server });
  
 wss.on('connection', function connection(ws) {
@@ -16,5 +13,5 @@ wss.on('connection', function connection(ws) {
   ws.send('something');
 });
  
-server.listen(8080, () => console.log('listening on wss://localhost:8080'));
+server.listen(8080, () => console.log('listening on ws://localhost:8080'));
 
